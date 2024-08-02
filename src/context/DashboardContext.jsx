@@ -1,15 +1,21 @@
 import { useContext } from 'react';
 import { createContext, useState } from 'react';
 
+import { checkDarkTheme } from '../hooks/checkDarkMode';
+
 const DashboardContext = createContext();
 
 export const DashboardProvider = ({ children }) => {
   const user = { name: 'Jim' };
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(checkDarkTheme());
 
   const toggleDarkTheme = () => {
-    setIsDarkTheme((darkTheme) => !darkTheme);
+    const newDarkTheme = !isDarkTheme;
+    setIsDarkTheme(newDarkTheme);
+    document.body.classList.toggle('dark-theme', isDarkTheme);
+
+    localStorage.setItem('dark-theme', newDarkTheme);
   };
 
   const toggleSidebar = () => {

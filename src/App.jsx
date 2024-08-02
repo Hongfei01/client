@@ -8,10 +8,15 @@ import {
   DashboardLayout,
   Error,
   AddJob,
+  AllJobs,
   Stats,
   Profile,
   Admin,
 } from './pages';
+
+import { checkDarkTheme } from './hooks/checkDarkMode';
+
+checkDarkTheme();
 
 const router = createBrowserRouter([
   {
@@ -27,6 +32,7 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           { index: true, element: <AddJob /> },
+          { path: 'all-jobs', element: <AllJobs /> },
           { path: 'stats', element: <Stats /> },
           { path: 'profile', element: <Profile /> },
           { path: 'admin', element: <Admin /> },
